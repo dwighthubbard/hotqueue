@@ -4,7 +4,6 @@
 import os
 import re
 
-from distribute_setup import use_setuptools; use_setuptools()
 from setuptools import setup
 
 
@@ -20,10 +19,6 @@ def read_from(filename):
 def get_long_description():
     return read_from(rel_file('README.rst'))
 
-def get_requirements():
-    data = read_from(rel_file('REQUIREMENTS'))
-    lines = map(lambda s: s.strip(), data.splitlines())
-    return filter(None, lines)
 
 def get_version():
     data = read_from(rel_file('hotqueue.py'))
@@ -36,9 +31,14 @@ setup(
     author_email="richardhenry@me.com",
     description="HotQueue is a Python library that allows you to use Redis as "
         "a message queue within your Python programs.",
+    extras_require={
+        'redislite': ['redislite>=1.0.254'],
+    },
     license="MIT",
     long_description=get_long_description(),
-    install_requires=get_requirements(),
+    install_requires=[
+        'redis>=2.0.0'
+    ],
     py_modules=['hotqueue'],
     url="http://github.com/richardhenry/hotqueue",
     version=get_version(),

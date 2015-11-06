@@ -10,12 +10,15 @@ try:
 except ImportError:
     import pickle
 
-from redis import Redis
+try:
+    from redislite import Redis
+except ImportError:
+    from redis import Redis
 
 
 __all__ = ['HotQueue']
 
-__version__ = '0.2.7'
+__version__ = '0.2.8'
 
 
 def key_for_name(name):
@@ -102,6 +105,10 @@ class HotQueue(object):
             msg = self.__redis.lpop(self.key)
         if msg is not None and self.serializer is not None:
             msg = self.serializer.loads(msg)
+
+        if isinstance(msg, bytes):
+            msg = msg.decode()
+
         return msg
     
     def put(self, *msgs):
