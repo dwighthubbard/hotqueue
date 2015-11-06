@@ -6,6 +6,8 @@ and a list key named 'hotqueue:testqueue' will be created and deleted in db 0
 several times while the tests are running.
 """
 
+import logging
+logging.basicConfig(level=logging.DEBUG)
 from time import sleep
 import threading
 import unittest
