@@ -4,6 +4,12 @@ HotQueue
 :Info: HotQueue is a Python library that allows you to use Redis as a message queue within your Python programs.
 :Author: Richard Henry (http://github.com/richardhenry)
 
+.. image:: https://travis-ci.org/dwighthubbard/hotqueue.svg?branch=master
+    :target: https://travis-ci.org/dwighthubbard/hotqueue
+    
+.. image:: https://coveralls.io/repos/dwighthubbard/hotqueue/badge.svg?branch=master&service=github
+  :target: https://coveralls.io/github/dwighthubbard/hotqueue?branch=master
+
 About HotQueue
 ==============
 
