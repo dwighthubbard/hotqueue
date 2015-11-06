@@ -8,3 +8,6 @@ docs/.build
 docs/_build
 dump.rdb
 MANIFEST
+cobertura.xml
+.coverage
+nosetests.xml

@@ -1,5 +1,3 @@
-include distribute_setup.py
 include LICENSE
 include README.rst
-include REQUIREMENTS
 include tests.py
