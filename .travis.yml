@@ -3,12 +3,12 @@ python: 2.7
 env:
   - TOX_ENV=py27-redislite
   - TOX_ENV=py34-redislite
-  - TOX_ENV=pypy-redislite
 matrix:
   fast_finish: true
   allow_failures:
     - env:
-      - TOX_ENV=pypy
+      - TOX_ENV=py27-redis
+      - TOX_ENV=py34-redis
       - TOX_ENV=build_docs
 install:
   - sudo apt-get update -qq
