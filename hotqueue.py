@@ -10,7 +10,10 @@ try:
 except ImportError:
     import pickle
 
-from redis import Redis
+try:
+    from redislite import Redis
+except ImportError:
+    from redis import Redis
 
 
 __all__ = ['HotQueue']
