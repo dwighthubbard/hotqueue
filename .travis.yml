@@ -1,9 +1,9 @@
 language: python
 python: 2.7
 env:
-  - TOX_ENV=py27
-  - TOX_ENV=py34
-  - TOX_ENV=pypy
+  - TOX_ENV=py27-redislite
+  - TOX_ENV=py34-redislite
+  - TOX_ENV=pypy-redislite
 matrix:
   fast_finish: true
   allow_failures:
