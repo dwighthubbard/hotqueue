@@ -7,7 +7,7 @@ several times while the tests are running.
 """
 
 import logging
-logging.basicConfig(level=logging.DEBUG)
+# logging.basicConfig(level=logging.DEBUG)
 from time import sleep
 import threading
 import unittest

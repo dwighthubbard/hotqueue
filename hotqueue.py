@@ -105,6 +105,10 @@ class HotQueue(object):
             msg = self.__redis.lpop(self.key)
         if msg is not None and self.serializer is not None:
             msg = self.serializer.loads(msg)
+
+        if isinstance(msg, bytes):
+            msg = msg.decode()
+
         return msg
     
     def put(self, *msgs):
