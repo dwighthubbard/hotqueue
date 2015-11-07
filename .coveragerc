@@ -1,0 +1,7 @@
+[run]
+branch = True
+source = hotqueue
+cover_pylib = False
+
+[report]
+ignore_errors = True
