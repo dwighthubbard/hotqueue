@@ -3,7 +3,7 @@
 """HotQueue is a Python library that allows you to use Redis as a message queue
 within your Python programs.
 """
-
+from __future__ import print_function
 from functools import wraps
 try:
     import cPickle as pickle
@@ -42,9 +42,10 @@ class HotQueue(object):
         :attr:`host`, :attr:`port`, :attr:`db`
     """
 
-    def __init__(self, name, serializer=pickle, redis=None, **kwargs):
+    def __init__(self, name, serializer=pickle, redis=None, max_queue_length=None, **kwargs):
         self.name = name
         self.serializer = serializer
+        self.max_queue_length = max_queue_length
         if redis:
             self.__redis = redis
         else:
@@ -68,7 +69,7 @@ class HotQueue(object):
 
         >>> queue = HotQueue("example")
         >>> for msg in queue.consume(timeout=1):
-        ...     print msg
+        ...     print(msg)
         my message
         another message
 
@@ -129,13 +130,15 @@ class HotQueue(object):
         if self.serializer is not None:
             msgs = [self.serializer.dumps(m) for m in msgs]
         self.__redis.rpush(self.key, *msgs)
+        if self.max_queue_length:
+            self.__redis.ltrim(self.key, 0, int(self.max_queue_length) - 1)
 
     def worker(self, *args, **kwargs):
         """Decorator for using a function as a queue worker. Example:
 
         >>> @queue.worker(timeout=1)
         ... def printer(msg):
-        ...     print msg
+        ...     print(msg)
         >>> printer()
         my message
         another message
@@ -144,7 +147,7 @@ class HotQueue(object):
 
         >>> @queue.worker
         ... def printer(msg):
-        ...     print msg
+        ...     print(msg)
         >>> printer()
         my message
         another message
