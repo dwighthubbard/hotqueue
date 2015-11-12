@@ -16,10 +16,6 @@ except ImportError:  # pragma: no cover
     from redis import Redis
 
 
-__all__ = ['HotQueue']
-__version__ = '0.2.8'
-
-
 def key_for_name(name):
     """Return the key name used to store the given queue name in Redis."""
     return 'hotqueue:%s' % name
@@ -42,7 +38,10 @@ class HotQueue(object):
         :attr:`host`, :attr:`port`, :attr:`db`
     """
 
-    def __init__(self, name, serializer=pickle, redis=None, max_queue_length=None, **kwargs):
+    def __init__(
+            self, name, serializer=pickle, redis=None, max_queue_length=None,
+            **kwargs
+    ):
         self.name = name
         self.serializer = serializer
         self.max_queue_length = max_queue_length

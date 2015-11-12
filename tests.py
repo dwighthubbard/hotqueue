@@ -89,7 +89,13 @@ class HotQueueTestCase(unittest.TestCase):
         self.queue.put(alphabet[0], alphabet[1], alphabet[2])
         self.queue.put(alphabet[3])
         self.queue.put(alphabet[4])
-        msgs = [self.queue.get(), self.queue.get(), self.queue.get(), self.queue.get(), self.queue.get()]
+        msgs = [
+            self.queue.get(),
+            self.queue.get(),
+            self.queue.get(),
+            self.queue.get(),
+            self.queue.get()
+        ]
         self.assertEqual(msgs, alphabet)
 
     def test_length(self):
