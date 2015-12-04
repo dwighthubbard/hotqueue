@@ -121,6 +121,7 @@ setup_arguments = dict(
     license="MIT",
     long_description=readme(),
     name="redislite-hotqueue",
+    packages=['hotqueue'],
     package_data={
         'hotqueue': ['package_metadata.json'],
     },
