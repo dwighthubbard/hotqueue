@@ -61,4 +61,4 @@ Requirements
 ============
 
 - Python 2.7+ (tested on versions 2.7.10, 3.4.3, and pyp 2.6.1)
-- `redislite <http://redis.io/>`_ 1.0.254+
+- `redislite <http://github.com/yahoo/redislite/>`_ 1.0.254+

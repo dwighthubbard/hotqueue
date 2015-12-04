@@ -22,20 +22,39 @@ def key_for_name(name):
 
 
 class HotQueue(object):
-    """Simple FIFO message queue stored in a Redis list. Example:
+    """Simple FIFO message queue stored in a Redis list.
 
-    >>> from hotqueue import HotQueue
-    >>> queue = HotQueue("myqueue", dbfilename="queue.rdb")
+    Parameters
+    ----------
 
-    :param name: name of the queue
-    :param serializer: the class or module to serialize msgs with, must have
+    name : str
+        name of the queue
+
+    max_queue_length : int
+        Maximum length the queue can grow to (default is None allows the queue
+        to grow without any limits.
+
+    serializer : class, module, optional
+        the class or module to serialize msgs with, must have
         methods or functions named ``dumps`` and ``loads``,
         `pickle <http://docs.python.org/library/pickle.html>`_ is the default,
         use ``None`` to store messages in plain text (suitable for strings,
         integers, etc)
-    :param: redis: Optional redis connection object
-    :param kwargs: additional kwargs to pass to :class:`redislite.Redis`, most commonly
+
+    redis : redis.Redis, redislite.Redis, optional
+        redis connection object, defaults to redislite.Redis with fallback to
+        redis.Redis.
+
+    **kwargs
+        Additional kwargs to pass to :class:`redislite.Redis`, most commonly
         :attr:`dbfilename`.
+
+    Examples
+    --------
+
+    >>> from hotqueue import HotQueue
+    >>> queue = HotQueue("myqueue", dbfilename="queue.rdb")
+
     """
 
     def __init__(
@@ -55,16 +74,41 @@ class HotQueue(object):
 
     @property
     def key(self):
-        """Return the key name used to store this queue in Redis."""
+        """
+        Key in Redis to store the queue
+
+        Returns
+        -------
+        str
+            The name of the key containing the queue in redis.
+        """
         return key_for_name(self.name)
 
     def clear(self):
-        """Clear the queue of all messages, deleting the Redis key."""
+        """
+        Clear the queue of all messages, by deleting the Redis key.
+        """
         self.__redis.delete(self.key)
 
     def consume(self, **kwargs):
-        """Return a generator that yields whenever a message is waiting in the
-        queue. Will block otherwise. Example:
+        """
+        A blocking generator that yields whenever a message is waiting in the
+        queue.
+
+        Parameters
+        ----------
+
+        **kwargs
+            any arguments that :meth:`~hotqueue.HotQueue.get` can
+            accept (:attr:`block` will default to ``True`` if not given)
+
+        Yields
+        ------
+        object
+            The deserialized object from the queue.
+
+        Examples
+        --------
 
         >>> queue = HotQueue("example")
         >>> for msg in queue.consume(timeout=1):
@@ -72,8 +116,6 @@ class HotQueue(object):
         my message
         another message
 
-        :param kwargs: any arguments that :meth:`~hotqueue.HotQueue.get` can
-            accept (:attr:`block` will default to ``True`` if not given)
         """
         kwargs.setdefault('block', True)
         try:
@@ -87,17 +129,33 @@ class HotQueue(object):
             return
 
     def get(self, block=False, timeout=None):
-        """Return a message from the queue. Example:
+        """
+        Get a message from the queue.
+
+        Parameters
+        ----------
+
+        block : bool
+            whether or not to wait until a msg is available in
+            the queue before returning; ``False`` by default
+
+        timeout : int
+            When using :attr:`block`, if no msg is available
+            for :attr:`timeout` in seconds, give up and return
+
+        Returns
+        -------
+        object
+            The deserialized object from the queue.
+
+        Examples
+        --------
 
         >>> queue.get()
         'my message'
         >>> queue.get()
         'another message'
 
-        :param block: whether or not to wait until a msg is available in
-            the queue before returning; ``False`` by default
-        :param timeout: when using :attr:`block`, if no msg is available
-            for :attr:`timeout` in seconds, give up and return ``None``
         """
         if block:
             if timeout is None:
