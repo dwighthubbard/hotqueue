@@ -8,6 +8,10 @@ HotQueue
 .. image:: https://coveralls.io/repos/dwighthubbard/hotqueue/badge.svg?branch=master&service=github
   :target: https://coveralls.io/github/dwighthubbard/hotqueue?branch=master
   
+.. image:: https://readthedocs.org/projects/redislite-hotqueue/badge/?version=latest
+  :target: http://redislite-hotqueue.readthedocs.org/en/latest/?badge=latest
+  :alt: Documentation Status
+  
 :Info: HotQueue is a Python library that allows you to use Redis as a message queue within your Python programs.
 :Author: Richard Henry (http://github.com/richardhenry), Dwight Hubbard (http://github.com/dwighthubbard)
 
@@ -26,4 +30,4 @@ To install it, run::
 
     pip install -U redislite-hotqueue
 
-The best place to get started is `the documentation <http://richardhenry.github.com/hotqueue/>`_.
+The best place to get started is `the documentation <http://redislite-hotqueue.readthedocs.org/en/latest/>`_.
