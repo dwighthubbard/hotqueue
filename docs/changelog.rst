@@ -1,6 +1,10 @@
 =========
 Changelog
 =========
+Changes in v1.3.0
+=================
+- Add support for `redislite` to allow operation without installing a redis server.
+- Implement CI/CD pipeline to automate the build and testing against multiple python versions.
 
 Changes in v0.2.7
 =================

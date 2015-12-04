@@ -101,8 +101,8 @@ def get_and_update_metadata():
 
 
 setup_arguments = dict(
-    author="Richard Henry",
-    author_email="richardhenry@me.c",
+    author="Dwight Hubbard",
+    author_email="d@d-h.us",
     classifiers=[
         'Programming Language :: Python',
         'Development Status :: 4 - Beta',
@@ -126,8 +126,8 @@ setup_arguments = dict(
     },
     py_modules=['hotqueue'],
     scripts=scripts(),
-    url="http://github.com/dhubbard/hotqueue",
-    version='0.3.0',
+    url="http://github.com/dwighthubbard/hotqueue",
+    version='1.3.0',
 )
 
 

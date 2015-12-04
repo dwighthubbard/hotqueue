@@ -27,7 +27,8 @@ Iterating over a queue indefinitely, waiting if nothing is available:
 
 More advanced features that make it easy to work with queues are available. To go deeper, you should read the :doc:`tutorial`.
 
-The main advantage of the HotQueue model is that there is no queue server to run, other than Redis. This is particularly ideal if you're already using Redis as a datastore elsewhere. Plus, Redis is really fast!
+The main advantage of the HotQueue model is that there is no queue server to run since the `redislite` module will
+handle starting/stopping a redis server automatically as needed. Plus, Redis is really fast!
 
 Installation
 ============
@@ -36,14 +37,14 @@ To install it, run:
 
 .. code-block:: console
 
-    pip install -U hotqueue
+    pip install -U redislite-hotqueue
 
 It also works with ``easy_install``, if that's your jam. You can `download versioned packages directly from PyPI <http://pypi.python.org/pypi/hotqueue>`_.
 
-The source code is available on `GitHub <http://github.com/richardhenry/hotqueue>`_.
+The source code is available on `GitHub <http://github.com/dwighthubbard/hotqueue>`_ and is a fork of the
+code available at`GitHub <http://github.com/richardhenry/hotqueue>`_.
 
-To get help with HotQueue, use the `HotQueue Users mailing list
-<http://groups.google.com/group/hotqueue-users>`_.
+To get help with HotQueue, use the `HotQueue Users mailing list <http://groups.google.com/group/hotqueue-users>`_.
 
 Documentation
 =============
@@ -53,11 +54,11 @@ Documentation
    
    tutorial
    apireference
+   contributing
    changelog
 
 Requirements
 ============
 
-- Python 2.5+ (tested on versions 2.5.4, 2.6.1, and 2.7.1)
-- `redis-server <http://redis.io/>`_ 2.0+
-- `redis-py <http://pypi.python.org/pypi/redis/2.0.0>`_ 2.0.0+
+- Python 2.7+ (tested on versions 2.7.10, 3.4.3, and pyp 2.6.1)
+- `redislite <http://github.com/yahoo/redislite/>`_ 1.0.254+

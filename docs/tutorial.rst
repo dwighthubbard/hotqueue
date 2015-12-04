@@ -10,13 +10,10 @@ Connecting to Redis
 Creating a queue is as simple as creating a :class:`~hotqueue.HotQueue` instance:
 
     >>> from hotqueue import HotQueue
-    >>> queue = HotQueue("myqueue", host="localhost", port=6379, db=0)
+    >>> queue = HotQueue("myqueue", dbfilename="/tmp/redis.rdb")
 
-In this example, the queue will be stored as a Redis list named ``hotqueue:myqueue``, on the Redis server running at ``localhost:6379``, in database ``0``. The :attr:`host`, :attr:`port` and :attr:`db` arguments are optional; if none are given the defaults will be used.
-
-If you're hosting Redis on a Unix socket, use the :attr:`unix_socket_path` argument instead:
-
-    >>> queue = HotQueue("myqueue", unix_socket_path="/tmp/redis.sock")
+In this example, the queue will be stored as a Redis list named ``hotqueue:myqueue``, on the `redislite` server.
+The :attr:`dbfilename` argument is optional; if none are given the `redislite` default setings will be used.
 
 Putting Items Onto the Queue
 ============================
@@ -73,7 +70,7 @@ An `even better` way to pull items off the queue is to use the :meth:`hotqueue.H
 
     from hotqueue import HotQueue
     
-    queue = HotQueue("myqueue", host="localhost", port=6379, db=0)
+    queue = HotQueue("myqueue", dbfilename="/tmp/redis.rdb")
     
     @queue.worker
     def square(num):
@@ -100,7 +97,7 @@ To serialize your data as JSON, you can use the `json <http://docs.python.org/li
 
     >>> import json
     >>> from hotqueue import HotQueue
-    >>> queue = HotQueue("myqueue", serializer=json, host="localhost", port=6379, db=0)
+    >>> queue = HotQueue("myqueue", serializer=json, dbfilename="/tmp/redis.rdb")
     >>> queue.put({'name': "Richard Henry", 'eyes': "blue"})
     >>> queue.get()
     {'name': 'Richard Henry', 'eyes': 'blue'}
