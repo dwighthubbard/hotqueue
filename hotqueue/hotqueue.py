@@ -25,7 +25,7 @@ class HotQueue(object):
     """Simple FIFO message queue stored in a Redis list. Example:
 
     >>> from hotqueue import HotQueue
-    >>> queue = HotQueue("myqueue", host="localhost", port=6379, db=0)
+    >>> queue = HotQueue("myqueue", dbfilename="queue.rdb")
 
     :param name: name of the queue
     :param serializer: the class or module to serialize msgs with, must have
@@ -34,8 +34,8 @@ class HotQueue(object):
         use ``None`` to store messages in plain text (suitable for strings,
         integers, etc)
     :param: redis: Optional redis connection object
-    :param kwargs: additional kwargs to pass to :class:`Redis`, most commonly
-        :attr:`host`, :attr:`port`, :attr:`db`
+    :param kwargs: additional kwargs to pass to :class:`redislite.Redis`, most commonly
+        :attr:`dbfilename`.
     """
 
     def __init__(
